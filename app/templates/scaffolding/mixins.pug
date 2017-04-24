@@ -39,6 +39,24 @@ mixin output(id, value, label, advanced = false)
                     label=label
         else
             span.output(id=id)=value
+			
+//- OutputExt data from the API
+mixin outputExt(id, value, label, advanced = false)
+    if block
+        span.output(id=id,style='width:100%;')
+            block
+    else
+        if label
+            span.output(id=id,style='width:100%;')
+                if advanced
+                    label
+                        | #{label} :
+                    span=value
+                else
+                    span=value
+                    label=label
+        else
+            span.output(id=id,style='width:100%;')=value
 
 //- Generates an unordered list
 mixin list(id = '', output, enableCopy, ...listItems)

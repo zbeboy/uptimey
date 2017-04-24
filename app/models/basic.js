@@ -1,7 +1,7 @@
 /**
  * Required packages
  */
-const osUptime = require('os-uptime')();
+const osUptime = require('os');
 const moment = require('moment');
 const publicIp = require('public-ip').v4();
 const ipLocation = require('iplocation');
@@ -31,7 +31,7 @@ module.exports = {
      * between the current time and the OS time.
      */
     getUptime() {
-        let diffSeconds = moment().diff(osUptime, 'seconds'),
+        let diffSeconds = moment().diff(osUptime.uptime(), 'seconds'),
             calcMinutes = diffSeconds / 60,
             calcHours   = calcMinutes / 60,
             days        = Math.floor(calcHours / 24),
@@ -56,7 +56,7 @@ module.exports = {
      * Returns the date when the server became active.
      */
     getActiveDate() {
-        return moment(osUptime).format('MMMM DD, YYYY');
+        return moment(osUptime.uptime()).format('MMMM DD, YYYY');
     },
 
     /**
